@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import EmpresaServices from "../services/EmpresaService";
+//import EmpresaServices from "../services/EmpresaService";
 import apiServices from "../services/EmpresaService";
 
 
@@ -49,7 +49,7 @@ return (
             {empresas.map((empresa) => (
               <tr key={empresa._id}>
                 
-                <td>{empresa.razaoSocial}</td>
+                <td >{empresa.razaoSocial}</td>
                 <td>{empresa.cnpj}</td>
                 <td>{empresa.endereco}</td>
                 <td>{empresa.bairro}</td>

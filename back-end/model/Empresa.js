@@ -7,7 +7,8 @@ const Empresa = mongoose.model("Empresa", {
     bairro : String,
     municipio : String,
     cep : String,
-    telefone : String
+    telefone : String,
+    descricaoServ : String 
 
 });
 
