@@ -7,23 +7,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const EmpresaSave = () => {
   const [razaoSocial, setRazaoSocial] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [endereco, setEndereco] = useState("");
+  const [inscricaoMunicipal, setInscricaoMunicipal] = useState("");
+  const [logradouro, setLogradouro] = useState("");
   const [bairro, setBairro] = useState("");
   const [municipio, setMunicipio] = useState("");
+  const [estado, setEstado] = useState("");
   const [cep, setCep] = useState("");
   const [telefone, setTelefone] = useState("");
+  const [descricaoServ, setDescricaoServ] = useState("");
+  const [dataEmissao, setDataEmissao] = useState("");
+  const [valorServico, setValorServico] = useState("");
   const { _id } = useParams();
+
+
 
   const saveEmpresa = () => {
 
     const empresas = {
       razaoSocial,
       cnpj,
-      endereco,
-      bairro,
-      municipio,
-      cep,
-      telefone
+      inscricaoMunicipal,
+      endereco: {
+        logradouro,
+        bairro,
+        municipio,
+        estado,
+        cep
+      }
+      ,
+      telefone,
+      descricaoServ,
+      dataEmissao,
+      valorServico
 
     };
     if (_id) {
@@ -31,7 +46,7 @@ const EmpresaSave = () => {
         .update(empresas)
         .then((response) => {
           console.log("Empresa atualizada com sucesso !!");
-          window.location("/lista");
+          window.location("/listar");
         })
         .catch((error) => {
           console.log("Erro ao Atualizar!!!", error);
@@ -44,7 +59,7 @@ const EmpresaSave = () => {
         .then((response) => {
           console.log("Empresa cadastrada com sucesso!!", response.data);
           alert("Empresa cadastrada com sucesso!!");
-          window.location = "/lista";
+          window.location = "/listar";
         })
         .catch((error) => {
           console.log("Erro ao cadastrar", error);
@@ -61,11 +76,18 @@ const EmpresaSave = () => {
         .then(empresa => {
           setRazaoSocial(empresa.data.razaoSocial);
           setCnpj(empresa.data.cnpj);
-          setEndereco(empresa.data.endereco);
+          setInscricaoMunicipal(empresa.data.inscricaoMunicipal);
+          setLogradouro(empresa.data.logradouro);
           setBairro(empresa.data.bairro);
           setMunicipio(empresa.data.municipio);
+          setEstado(empresa.data.estado);
           setCep(empresa.data.cep);
-          setTelefone(empresa.data.telefone)
+          setTelefone(empresa.data.telefone);
+          setDescricaoServ(empresa.data.descricaoServ);
+          setDataEmissao(empresa.data.dataEmissao);
+          setValorServico(empresa.data.valorServico);
+
+
 
         })
     }
@@ -76,12 +98,12 @@ const EmpresaSave = () => {
 
     <div className="container">
       <h3>Cadastrar Clientes</h3>
-      <hr />       
-        
-      
+      <hr />
+
+
       <form>
 
-      <div className="col-md-8">
+        <div className="col-md-8">
           <label className="form-label" >CNPJ </label>
           <input
             type="text"
@@ -91,8 +113,8 @@ const EmpresaSave = () => {
             onChange={(e) => setCnpj(e.target.value)}
             required
           />
-          
-          
+
+
         </div>
 
         <div className="col-md-8">
@@ -105,31 +127,36 @@ const EmpresaSave = () => {
             id="nome"
             value={razaoSocial}
             onChange={(e) => setRazaoSocial(e.target.value)}
-            
+
           />
-        
+        </div>
+        <div className="col-md-4">
 
+          <label className="form-label" >INSCRICAO MUNICIPAL </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inscricao"
+            value={inscricaoMunicipal}
+            onChange={(e) => setInscricaoMunicipal(e.target.value)}
 
+          />
+        </div>
 
-         </div>
-     
-
-        
-        
-        
 
         <div className="col-md-8">
-          <label>ENDEREÇO </label>
+          <label>LOGRADOURO </label>
           <input
             type="text"
             className="form-control col-4"
-            id="endereco"
-            value={endereco}
-            onChange={(e) => setEndereco(e.target.value)}
-            
+            id="logradouro"
+            value={logradouro}
+            onChange={(e) => setLogradouro(e.target.value)}
+
             required
           />
         </div>
+
         <div className="col-md-8">
           <label>BAIRRO </label>
           <input
@@ -138,7 +165,7 @@ const EmpresaSave = () => {
             id="bairro"
             value={bairro}
             onChange={(e) => setBairro(e.target.value)}
-            
+
             required
           />
         </div>
@@ -150,10 +177,59 @@ const EmpresaSave = () => {
             id="municipio"
             value={municipio}
             onChange={(e) => setMunicipio(e.target.value)}
-            
+
             required
           />
         </div>
+        <div className="col-md-4">
+          <label>ESTADO </label>
+          <input
+            type="text"
+            className="form-control col-4"
+            id="estado"
+            value={estado}
+            onChange={(e) => setEstado(e.target.value)}
+
+            required
+          />
+        </div>  
+        <div className="col-md-4">
+          <label>DESCRIÇÃO DE SERVIÇOS </label>
+          <input
+            type="text"
+            className="form-control col-4"
+            id="descricaoServ"
+            value={descricaoServ}
+            onChange={(e) => setDescricaoServ(e.target.value)}
+
+            required
+          />
+        </div> 
+        <div className="col-md-4">
+          <label>DATA DE EMISSAO </label>
+          <input
+            type="text"
+            className="form-control col-4"
+            id="dataEmissao"
+            value={dataEmissao}
+            onChange={(e) => setDataEmissao(e.target.value)}
+
+            required
+          />
+        </div> 
+        <div className="col-md-4">
+          <label>VALOR DE SERVIÇOS </label>
+          <input
+            type="text"
+            className="form-control col-4"
+            id="valorDeServicos"
+            value={valorServico}
+            onChange={(e) => setValorServico(e.target.value)}
+
+            required
+          />
+        </div> 
+
 
         <div className="col-md-2">
           <label>Telefone </label>
@@ -163,15 +239,10 @@ const EmpresaSave = () => {
             id="telefone"
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
-            
+
             required
           />
         </div>
-
-      
-
-
-
 
         <div className="col-md-2">
           <label className="form-label">CEP </label>
@@ -181,14 +252,14 @@ const EmpresaSave = () => {
             id="cep"
             value={cep}
             onChange={(e) => setCep(e.target.value)}
-            
+
             required
           />
         </div>
-       
+
         <div>
           <button type="button" onClick={(e) => saveEmpresa(e)} className="btn btn-outline-primary mx-auto col-mx "> Salvar   </button>
-          <Link type="button" className="btn btn-outline-primary mx-auto col-mx ml-2" to={"/lista"} > Lista de Empresas  </Link>
+          <Link type="button" className="btn btn-outline-primary mx-auto col-mx ml-2" to={"/listar"} > Lista de Empresas  </Link>
 
 
 

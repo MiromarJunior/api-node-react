@@ -7,6 +7,8 @@ import apiServices from "../services/EmpresaService";
 
 const EmpresaList = ()=>{
     const [empresas, setEmpresas] = useState([]);
+   
+    
     useEffect(() =>{
         init();
     },[]);
@@ -18,6 +20,7 @@ const init = () =>{
       .then((response) => {
         console.log("Mostra dados clientes", response.data);
         setEmpresas(response.data);
+        
       })
       .catch((error) => {
         console.log("Apenas erros", error);
@@ -37,26 +40,29 @@ return (
             <tr>
               <th scope="col">Razão Social</th>
               <th scope="col">CNPJ </th>
-              <th scope="col">ENDEREÇO</th>
-              <th scope="col">BAIRRO</th>
+              <th scope="col">INSCRICAO</th>
               <th scope="col">MUNICIPIO</th>
-              <th scope="col">CEP</th>
+              <th scope="col">UF</th>
               <th scope="col">TELEFONE</th>
               
             </tr>
           </thead>
           <tbody>
+
+           
+             
+            
+            
             {empresas.map((empresa) => (
               <tr key={empresa._id}>
                 
                 <td >{empresa.razaoSocial}</td>
                 <td>{empresa.cnpj}</td>
-                <td>{empresa.endereco}</td>
-                <td>{empresa.bairro}</td>
-                <td>{empresa.municipio}</td>
-                <td>{empresa.cep}</td>
-                <td>{empresa.telefone}</td>
-                <td>
+                <td>{empresa.inscricaoMunicipal}</td>
+                <td>{empresa.endereco.municipio}</td>
+                <td>{empresa.endereco.estado}</td>
+                 <td>{empresa.telefone}</td>
+                <td>            
                   
                   <button className="btn btn-danger ml-2" onClick={(e) => {
                    alert("Modulo não criado !!!")
