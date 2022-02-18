@@ -7,7 +7,7 @@ const getAll = () => {
 }
 
 const getId = _id =>{
-  return httpClient.get(`listar/${_id}`);
+  return httpClient.get(`/listar/${_id}`);
 }
 
 const create = data =>{
@@ -15,9 +15,15 @@ const create = data =>{
 }
 
 const update = data =>{
-  return httpClient.put('/atualizar',data);
+  return httpClient.put("/atualizar",data);
 }
 
 
+const remove = _id =>{
+  return httpClient.delete(`/deletar/${_id}`);
+}
+
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {getAll, getId,create, update};
+export default {getAll, getId,create, update, remove};

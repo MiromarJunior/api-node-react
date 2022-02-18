@@ -1,4 +1,3 @@
-const Decimal = require("decimal");
 const mongoose = require("mongoose");
 
 const Emp = mongoose.model("Emp", {
@@ -15,7 +14,7 @@ const Emp = mongoose.model("Emp", {
     telefone : String,
     descricaoServ : String, 
     dataEmissao :String,
-    valorServico : Decimal
+    valorServico : Number
 
 });
 

@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import EmpresaService from "../services/EmpresaService";
 //import EmpresaServices from "../services/EmpresaService";
 import apiServices from "../services/EmpresaService";
 
@@ -26,6 +27,19 @@ const init = () =>{
         console.log("Apenas erros", error);
       });
   }
+
+  const deleteEmpresa = (_id) => {
+    EmpresaService.remove(_id)
+      .then((response) => {
+        alert("Empresa removida com sucesso", response.data);
+        init();
+      })
+      .catch((error) => {
+        alert("Erro ao deletar ");
+        console.log("Empresa removida com sucesso", error);
+      })
+  }
+
 
 return (
     <div>
@@ -63,11 +77,20 @@ return (
                 <td>{empresa.endereco.estado}</td>
                  <td>{empresa.telefone}</td>
                 <td>            
+                <Link to= {`/atualizar/${empresa._id}`}  className="btn btn-outline-primary">
+          ATUALIZAR CADASTRO
+        </Link>
+                </td>
+                <td>            
                   
                   <button className="btn btn-danger ml-2" onClick={(e) => {
-                   alert("Modulo não criado !!!")
-                  }} >Delete</button>
+                    var res = window.confirm("Deseja exluir a empresa : "+empresa.razaoSocial + "?" );
+                      res ? deleteEmpresa(empresa._id) : alert("operação cancelada");
+                  
+                  }} >REMOVER EMPRESA</button>
                 </td>
+
+
               </tr>
             ))}
           </tbody>

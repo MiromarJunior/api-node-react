@@ -15,8 +15,8 @@ function App() {
       
       <Routes>
         <Route path="/listar" element= {<EmpresaList/>} />
-        <Route path="/salvar" element= {<EmpresaSave/>} />
-        <Route path="/empresa/edit/:_id" element= {<EmpresaSave/>} />
+        <Route path="/salvar/" element= {<EmpresaSave/>} />
+        <Route path="/atualizar/:_id" element= {<EmpresaSave/>} />
         <Route path="*" element={<NotFound />} />
         
         

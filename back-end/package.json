@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MiromarJunior/CrudNodeMongoDb#readme",
   "dependencies": {
+    "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
     "cors": "^2.8.5",
     "decimal": "^0.0.2",

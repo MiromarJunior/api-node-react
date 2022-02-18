@@ -19,11 +19,11 @@ const EmpresaSave = () => {
   const [valorServico, setValorServico] = useState("");
   const { _id } = useParams();
 
-
-
-  const saveEmpresa = () => {
-
+  function saveEmpresa(e){
+    e.preventDefault();
+    
     const empresas = {
+      _id,
       razaoSocial,
       cnpj,
       inscricaoMunicipal,
@@ -42,17 +42,16 @@ const EmpresaSave = () => {
 
     };
     if (_id) {
-      empresaService
-        .update(empresas)
-        .then((response) => {
-          console.log("Empresa atualizada com sucesso !!");
+         empresaService.update(empresas._id)
+      .then((response) => {
+      console.log("Empresa atualizada com sucesso !!", response.data);
           window.location("/listar");
-        })
-        .catch((error) => {
-          console.log("Erro ao Atualizar!!!", error);
+       })
+       .catch((error) => {
+       console.log("Erro ao Atualizar!!!", error);
 
-          alert("Erro ao cadastrar!!");
-        });
+        alert("Erro ao Atualizar!!");
+       });
 
     } else {
       empresaService.create(empresas)
@@ -70,18 +69,19 @@ const EmpresaSave = () => {
     }
   }
 
+
   useEffect(() => {
     if (_id) {
-      empresaService.getId(_id)
-        .then(empresa => {
+          empresaService.getId(_id)
+          .then(empresa => {
           setRazaoSocial(empresa.data.razaoSocial);
           setCnpj(empresa.data.cnpj);
           setInscricaoMunicipal(empresa.data.inscricaoMunicipal);
-          setLogradouro(empresa.data.logradouro);
-          setBairro(empresa.data.bairro);
-          setMunicipio(empresa.data.municipio);
-          setEstado(empresa.data.estado);
-          setCep(empresa.data.cep);
+          setLogradouro(empresa.data.endereco.logradouro);
+          setBairro(empresa.data.endereco.bairro);
+          setMunicipio(empresa.data.endereco.municipio);
+          setEstado(empresa.data.endereco.estado);
+          setCep(empresa.data.endereco.cep);
           setTelefone(empresa.data.telefone);
           setDescricaoServ(empresa.data.descricaoServ);
           setDataEmissao(empresa.data.dataEmissao);
@@ -89,9 +89,17 @@ const EmpresaSave = () => {
 
 
 
-        })
+        });
     }
   }, [_id])
+
+ 
+
+
+
+
+
+
   return (
 
 
